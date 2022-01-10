@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  drupal:
+    image: drupal:9.3.2-php7.4-apache-buster 
+    ports:
+      - 8083:80
+    volumes:
+      - ./web/modules:/var/www/html/modules
+      - ./web/profiles:/var/www/html/profiles
+      - ./web/themes:/var/www/html/themes
+      - ./web/sites:/var/www/html/sites
+      - ./config:/var/www/html/config
+    depends_on:
+      - mariadb
+    networks:
+      - app_network
+
+  mariadb:
+    image: mariadb:10.5.8
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_ROOT_PASSWORD: drupal
+      MYSQL_ROOT_HOST: mariadb_svc
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_network
+
+volumes:
+  drupal_modules:
+  drupal_profiles:
+  drupal_themes:
+  drupal_sites:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge
