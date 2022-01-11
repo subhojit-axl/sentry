@@ -1,6 +1,6 @@
 "https://{default}/":
     type: upstream
-    upstream: "app:http"
+    upstream: "sentry-poc:http"
     cache:
       enabled: true
 
