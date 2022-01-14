@@ -2,21 +2,20 @@ version: '3.3'
 
 services:
   drupal:
+    container_name: sentry_drupal
     image: drupal:9.3.2-php7.4-apache-buster 
     ports:
       - 8083:80
     volumes:
-      - ./web/modules:/var/www/html/modules
-      - ./web/profiles:/var/www/html/profiles
-      - ./web/themes:/var/www/html/themes
-      - ./web/sites:/var/www/html/sites
-      - ./config:/var/www/html/config
+      - ./:/opt/drupal
     depends_on:
       - mariadb
     networks:
       - app_network
+    restart: always
 
   mariadb:
+    container_name: sentry_db
     image: mariadb:10.5.8
     environment:
       MYSQL_DATABASE: drupal
