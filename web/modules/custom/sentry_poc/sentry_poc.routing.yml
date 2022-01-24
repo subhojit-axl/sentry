@@ -1,0 +1,21 @@
+sentry_poc.normal:
+  path: '/poc/normal'
+  defaults:
+    _controller: \Drupal\sentry_poc\Controller\SentryPocController::normal
+  method: GET
+  requirements:
+    _permission: 'access content'
+sentry_poc.slow:
+  path: '/poc/slow'
+  defaults:
+    _controller: \Drupal\sentry_poc\Controller\SentryPocController::slow
+  method: GET
+  requirements:
+    _permission: 'access content'
+sentry_poc.error:
+  path: '/poc/error'
+  defaults:
+    _controller: \Drupal\sentry_poc\Controller\SentryPocController::error
+  method: GET
+  requirements:
+    _permission: 'access content'
